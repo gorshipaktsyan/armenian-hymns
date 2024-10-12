@@ -6,5 +6,4 @@ async function copyToClipboard(text: string): Promise<void> {
     console.error('Unable to copy text to clipboard', error);
   }
 }
-
 export default copyToClipboard;
