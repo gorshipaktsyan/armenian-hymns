@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "armenian-hymns"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "armenian-hymns-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
