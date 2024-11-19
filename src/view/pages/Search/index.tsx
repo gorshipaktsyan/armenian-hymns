@@ -16,16 +16,19 @@ import SearchedHymnList from './SearchedHymnList';
 import SearchStyledComponents from './styles';
 
 const { StyledAlert } = StyledComponents;
-const { StyledForm, StyledSearchButton, StyledTextField } = SearchStyledComponents;
+const { StyledForm, StyledSearchButton, StyledTextField } =
+  SearchStyledComponents;
 
 function Search() {
   const [inputs, setInputs] = useState({
     armNumber: '',
     engNumber: '',
-    searchedText: ''
+    searchedText: '',
   });
   const [errorAlert, setErrorAlert] = useState(false);
-  const { isEngSearchVisible, language } = useSelector((state: RootState) => state.settings);
+  const { isEngSearchVisible, language } = useSelector(
+    (state: RootState) => state.settings
+  );
   const { foundHymns } = useSelector((state: RootState) => state.search);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -76,59 +79,67 @@ function Search() {
   return (
     <>
       {foundHymns.length ? (
-        <SearchedHymnList foundHymns={foundHymns} navigate={navigate} dispatch={dispatch} />
+        <SearchedHymnList
+          foundHymns={foundHymns}
+          navigate={navigate}
+          dispatch={dispatch}
+        />
       ) : (
         <StyledForm>
           <StyledTextField
-            type="decimal"
+            type='decimal'
             label={language.search.searchByArmenianNumber}
             value={inputs.armNumber}
             inputProps={{
               inputMode: 'decimal',
-              pattern: '[0-9]*'
+              pattern: '[0-9]*',
             }}
             onChange={(e) => {
               setInputs({
                 armNumber: e.target.value,
                 engNumber: '',
-                searchedText: ''
+                searchedText: '',
               });
             }}
             autoFocus
           />
           {isEngSearchVisible && (
             <StyledTextField
-              type="decimal"
+              type='decimal'
               label={language.search.searchByEnglishNumber}
               value={inputs.engNumber}
               inputProps={{
                 inputMode: 'decimal',
-                pattern: '[0-9]*'
+                pattern: '[0-9]*',
               }}
               onChange={(e) => {
                 setInputs({
                   armNumber: '',
                   engNumber: e.target.value,
-                  searchedText: ''
+                  searchedText: '',
                 });
               }}
             />
           )}
-          {/* <StyledTextField
+          <StyledTextField
             label={language.search.searchByText}
             value={inputs.searchedText}
             inputProps={{
-              inputMode: 'search'
+              inputMode: 'search',
             }}
             onChange={(e) => {
               setInputs({
                 armNumber: '',
                 engNumber: '',
-                searchedText: e.target.value
+                searchedText: e.target.value,
               });
             }}
-          /> */}
-          <StyledSearchButton type="submit" variant="contained" onClick={handleSubmit}>
+          />
+          <StyledSearchButton
+            type='submit'
+            variant='contained'
+            onClick={handleSubmit}
+          >
             <span style={{ fontSize: '16px' }}>{language.search.search}</span>
           </StyledSearchButton>
         </StyledForm>
@@ -137,8 +148,9 @@ function Search() {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={errorAlert}
         onClose={() => setErrorAlert(false)}
-        autoHideDuration={2000}>
-        <StyledAlert onClose={() => setErrorAlert(false)} severity="error">
+        autoHideDuration={2000}
+      >
+        <StyledAlert onClose={() => setErrorAlert(false)} severity='error'>
           {language.search.errorAlert}
         </StyledAlert>
       </Snackbar>
